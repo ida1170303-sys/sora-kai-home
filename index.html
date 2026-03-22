@@ -1,620 +1,108 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sora Kai Universe</title>
-  <style>
-    :root {
-      --bg: #07111f;
-      --bg-soft: #0d1c31;
-      --panel: rgba(15, 28, 49, 0.75);
-      --line: rgba(255,255,255,0.12);
-      --text: #f6f3ec;
-      --muted: #c6c3bf;
-      --gold: #d9b56d;
-      --gold-soft: rgba(217,181,109,0.18);
-      --max: 1180px;
-    }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>Sora Kai</title>
+  <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", "Noto Sans TC", "PingFang TC", sans-serif;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(217,181,109,0.10), transparent 28%),
-        radial-gradient(circle at 80% 10%, rgba(131,176,255,0.12), transparent 24%),
-        radial-gradient(circle at 50% 70%, rgba(217,181,109,0.08), transparent 30%),
-        linear-gradient(180deg, #06101d 0%, #081425 45%, #0b1830 100%);
-      color: var(--text);
-      line-height: 1.7;
+      font-family: "Noto Serif TC", serif;
+      background: #0f0f10;
+      color: #eaeaea;
     }
 
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+```
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
 
-    .stars,
-    .stars::before,
-    .stars::after {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      content: "";
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.85) 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,255,255,.45) 1px, transparent 1.5px);
-      background-size: 140px 140px, 220px 220px;
-      background-position: 0 0, 60px 80px;
-      opacity: .28;
-      z-index: 0;
-    }
-    .stars::before { transform: scale(1.2); opacity: .14; }
-    .stars::after { transform: scale(1.45); opacity: .08; }
+h1 {
+  font-size: 28px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+}
 
-    .wrap { position: relative; z-index: 1; }
+.intro {
+  margin-bottom: 60px;
+  line-height: 1.8;
+  color: #bbb;
+}
 
-    .container {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-    }
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 80px;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(10px);
-      background: rgba(5, 11, 20, 0.55);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
+.work img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+}
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 14px 0;
-    }
+.caption {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #888;
+  letter-spacing: 1px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-    }
+.footer {
+  margin-top: 100px;
+  font-size: 12px;
+  color: #666;
+}
+```
 
-    .brand-mark {
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 35% 35%, #fff6d9 0%, var(--gold) 45%, #8a6a2a 100%);
-      box-shadow: 0 0 18px rgba(217,181,109,0.6);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    .hero {
-      min-height: 92vh;
-      display: grid;
-      align-items: center;
-      padding: 56px 0 28px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.9fr;
-      gap: 42px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      color: var(--gold);
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      font-size: .82rem;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      font-size: clamp(2.6rem, 6vw, 5.6rem);
-      line-height: 1.05;
-      margin: 0 0 18px;
-      letter-spacing: -0.03em;
-    }
-
-    .subtitle {
-      max-width: 700px;
-      font-size: clamp(1.05rem, 2vw, 1.32rem);
-      color: var(--muted);
-      margin: 0 0 28px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 22px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      transition: .25s ease;
-      font-weight: 600;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold) 0%, #f4ddb2 100%);
-      color: #20180c;
-      border-color: transparent;
-      box-shadow: 0 12px 30px rgba(217,181,109,.18);
-    }
-
-    .btn-primary:hover { transform: translateY(-1px); }
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.18);
-    }
-
-    .hero-card {
-      position: relative;
-      background: linear-gradient(180deg, rgba(17,32,56,.75), rgba(11,22,40,.82));
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0,0,0,.28);
-      min-height: 540px;
-    }
-
-    .hero-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: .92;
-    }
-
-    .hero-card::after {
-      content: "Featured artwork";
-      position: absolute;
-      left: 18px;
-      bottom: 16px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(8,15,26,0.62);
-      color: #eae6dd;
-      font-size: 0.9rem;
-      border: 1px solid rgba(255,255,255,.10);
-    }
-
-    .section {
-      padding: 86px 0;
-    }
-
-    .section-head {
-      margin-bottom: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(1.9rem, 3vw, 3rem);
-      margin: 0;
-      line-height: 1.12;
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 760px;
-    }
-
-    .about-grid,
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 28px;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.18);
-    }
-
-    .timeline {
-      display: grid;
-      gap: 14px;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 92px 1fr;
-      gap: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-
-    .timeline-item:first-child { border-top: none; padding-top: 0; }
-    .year { color: var(--gold); font-weight: 700; }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .card {
-      overflow: hidden;
-      border-radius: 26px;
-      border: 1px solid var(--line);
-      background: rgba(13, 24, 42, 0.82);
-      transition: .25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(217,181,109,.35);
-      box-shadow: 0 20px 40px rgba(0,0,0,.18);
-    }
-
-    .card-media {
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      background: linear-gradient(135deg, #10213b, #1d355b);
-    }
-
-    .card-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .card-body { padding: 20px; }
-    .card-body h3 { margin: 0 0 8px; font-size: 1.24rem; }
-    .card-body p { margin: 0; color: var(--muted); }
-
-    .quote {
-      position: relative;
-      text-align: center;
-      padding: 90px 22px;
-      border-radius: 30px;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(217,181,109,0.12), transparent 32%),
-        linear-gradient(180deg, rgba(12, 24, 44, 0.92), rgba(8, 17, 31, 0.96));
-      border: 1px solid var(--line);
-      overflow: hidden;
-    }
-
-    .quote p {
-      margin: 0;
-      font-size: clamp(1.35rem, 3vw, 2.3rem);
-      line-height: 1.65;
-      letter-spacing: .03em;
-    }
-
-    .quote span {
-      display: block;
-      margin-top: 18px;
-      color: var(--gold);
-      font-size: .92rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-
-    .journal-list {
-      display: grid;
-      gap: 18px;
-    }
-
-    .journal-item {
-      display: grid;
-      grid-template-columns: 110px 1fr auto;
-      gap: 18px;
-      align-items: center;
-      padding: 18px 20px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: rgba(14, 25, 43, 0.72);
-    }
-
-    .journal-item time {
-      color: var(--gold);
-      font-size: .95rem;
-    }
-
-    .journal-item h3 {
-      margin: 0 0 4px;
-      font-size: 1.08rem;
-    }
-
-    .journal-item p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .97rem;
-    }
-
-    .journal-link {
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .journal-item:hover .journal-link { color: var(--text); }
-
-    .contact-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .contact-list a,
-    .contact-list div {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.06);
-    }
-
-    footer {
-      padding: 30px 0 46px;
-      color: #b8b5b0;
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-
-    .note {
-      font-size: .94rem;
-      color: var(--muted);
-    }
-
-    @media (max-width: 980px) {
-      .hero-grid,
-      .about-grid,
-      .contact-grid,
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card { min-height: 380px; }
-      .journal-item { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 1fr; gap: 4px; }
-    }
-
-    @media (max-width: 640px) {
-      .nav { align-items: flex-start; }
-      .nav-links { gap: 14px; font-size: .92rem; }
-      .section { padding: 68px 0; }
-      .panel, .card-body { padding: 20px; }
-      .quote { padding: 62px 18px; }
-    }
   </style>
 </head>
+
 <body>
-  <div class="stars"></div>
-  <div class="wrap">
-    <header>
-      <div class="container nav">
-        <a class="brand" href="#top">
-          <span class="brand-mark"></span>
-          <span>Sora Kai Universe</span>
-        </a>
-        <nav class="nav-links">
-          <a href="#about">關於</a>
-          <a href="#works">作品</a>
-          <a href="#cosmos">理念</a>
-          <a href="#journal">日誌</a>
-          <a href="#contact">聯絡</a>
-        </nav>
-      </div>
-    </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <div class="eyebrow">Art • Story • Cosmos</div>
-            <h1>我畫風、光，<br>以及生命存在的片刻。</h1>
-            <p class="subtitle">
-              這裡是 Sora Kai Universe。
-              關於繪畫、故事、劇場經驗，與人和宇宙之間安靜而深遠的連結。
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#works">進入作品宇宙</a>
-              <a class="btn btn-secondary" href="#about">認識創作者</a>
-            </div>
-          </div>
+<div class="container">
 
-          <div class="hero-card">
-            <img src="digital01.JPG" alt="精選作品" onerror="this.src='IMG_3373.JPG'">
-          </div>
-        </div>
-      </section>
+  <h1>Sora Kai</h1>
 
-      <section class="section" id="about">
-        <div class="container">
-          <div class="section-head">
-            <h2>關於創作者</h2>
-            <p>
-              我曾在德國學習，也在台灣的劇場裡表演、策劃與陪伴藝術工作發生。
-              如今，我將那些經驗沉澱為圖像、文字與更內在的宇宙風景。
-            </p>
-          </div>
-
-          <div class="about-grid">
-            <div class="panel">
-              <p>
-                我的創作常圍繞著幾個核心：風、光、馬、夢、宇宙與生命的回返。
-                我關心的不只是畫面本身，而是畫面背後那種難以言明的頻率。
-              </p>
-              <p>
-                這個網站不是單純的作品集，
-                它更像是一個宇宙入口，收納我走過的劇場、正在發生的繪畫，以及未來想抵達的故事世界。
-              </p>
-            </div>
-
-            <div class="panel">
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="year">過去</div>
-                  <div>德國學習與台灣劇場演出，累積表演與敘事的感受力。</div>
-                </div>
-                <div class="timeline-item">
-                  <div class="year">劇場</div>
-                  <div>參與劇場經營與兒童藝術推廣，理解空間、觀眾與創作之間的流動。</div>
-                </div>
-                <div class="timeline-item">
-                  <div class="year">現在</div>
-                  <div>以繪畫、繪本、日誌與網站，整理生命歷程，建立 Sora Kai Universe。</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="works">
-        <div class="container">
-          <div class="section-head">
-            <h2>精選作品</h2>
-            <p>先以三個入口呈現目前的創作方向。之後你可以把它們分別連到更完整的作品頁。</p>
-          </div>
-
-          <div class="cards">
-            <article class="card">
-              <div class="card-media">
-                <img src="digital02.JPG" alt="繪畫作品" onerror="this.src='IMG_6127.jpg'">
-              </div>
-              <div class="card-body">
-                <h3>Painting</h3>
-                <p>馬、風、光、宇宙與抽象畫面，捕捉情感與內在空間的流動。</p>
-              </div>
-            </article>
-
-            <article class="card">
-              <div class="card-media">
-                <img src="IMG_6131.JPG" alt="繪本與故事" onerror="this.src='IMG_8993.JPG'">
-              </div>
-              <div class="card-body">
-                <h3>Books</h3>
-                <p>繪本計畫、生命故事與圖文敘事，將感受轉化成可以行走的頁面。</p>
-              </div>
-            </article>
-
-            <article class="card">
-              <div class="card-media">
-                <img src="FB_IMG_1666607932957.jpg" alt="宇宙理念" onerror="this.src='FB_IMG_1660044514123.jpg'">
-              </div>
-              <div class="card-body">
-                <h3>Cosmos</h3>
-                <p>關於夢、時間、合一與宇宙意識的書寫，構成 Sora Kai 的哲學核心。</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="cosmos">
-        <div class="container">
-          <div class="quote">
-            <p>
-              人來自宇宙，<br>
-              最終也回到宇宙。<br>
-              沒有真正的生，也沒有真正的死，<br>
-              一切只是回到合一。
-            </p>
-            <span>Cosmos</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="journal">
-        <div class="container">
-          <div class="section-head">
-            <h2>創作日誌</h2>
-            <p>可以用來放你未來的短文、夢的記錄、繪畫過程與創作思考。</p>
-          </div>
-
-          <div class="journal-list">
-            <article class="journal-item">
-              <time>Journal 01</time>
-              <div>
-                <h3>夜海航行</h3>
-                <p>關於夜色、未知與內在旅程，像在黑暗中感應一條通往自身深處的航道。</p>
-              </div>
-              <a class="journal-link" href="#">閱讀 →</a>
-            </article>
-
-            <article class="journal-item">
-              <time>Journal 02</time>
-              <div>
-                <h3>佛像的夢</h3>
-                <p>夢裡那張平靜而巨大的臉，像凝視，也像一種比語言更早到來的理解。</p>
-              </div>
-              <a class="journal-link" href="#">閱讀 →</a>
-            </article>
-
-            <article class="journal-item">
-              <time>Journal 03</time>
-              <div>
-                <h3>畫馬的時候</h3>
-                <p>不是為了描盡每一個細節，而是想讓神韻先抵達畫面，讓呼吸先被看見。</p>
-              </div>
-              <a class="journal-link" href="#">閱讀 →</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="contact">
-        <div class="container">
-          <div class="section-head">
-            <h2>聯絡與未來計畫</h2>
-            <p>這裡可以慢慢補上你的社群、電子郵件、展覽消息與出版計畫。</p>
-          </div>
-
-          <div class="contact-grid">
-            <div class="panel">
-              <h3>Contact</h3>
-              <div class="contact-list">
-                <div>Email：ida1170303@gmail.com</div>
-                <div>Instagram：@sappholin66</div>
-                <div>Facebook：Sora Kai Universe</div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Projects</h3>
-              <p>
-                你可以在這裡列出：個人作品集、繪本出版、電子書、展覽、插畫合作，
-                或未來的 Sora Kai 宇宙系列企畫。
-              </p>
-              <p class="note">提示：先上線，之後再慢慢把文字與圖片換成你最想呈現的版本。</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        Sora Kai Universe © 2026 · Built with light, memory, and a little stardust.
-      </div>
-    </footer>
+  <div class="intro">
+    我畫風、光，以及生命存在的片刻。<br>
+    Fragments of inner landscapes.
   </div>
+
+  <div class="gallery">
+
+```
+<div class="work">
+  <img src="digital01.JPG">
+  <div class="caption">Fragment 01</div>
+</div>
+
+<div class="work">
+  <img src="digital02.JPG">
+  <div class="caption">Fragment 02</div>
+</div>
+
+<div class="work">
+  <img src="IMG_6131.JPG">
+  <div class="caption">Pattern</div>
+</div>
+
+<div class="work">
+  <img src="FB_IMG_1666607932957.jpg">
+  <div class="caption">Cosmos</div>
+</div>
+```
+
+  </div>
+
+  <div class="footer">
+    © Sora Kai
+  </div>
+
+</div>
+
 </body>
 </html>

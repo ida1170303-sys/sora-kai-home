@@ -2,9 +2,8 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Paintings | Sora Kai</title>
-
   <style>
     * {
       box-sizing: border-box;
@@ -13,115 +12,194 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC",
-                   "PingFang TC", "Microsoft JhengHei", sans-serif;
-      background: #111;
-      color: rgba(255,255,255,0.9);
+      font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      background: #f6f3ee;
+      color: #2f2a26;
+      line-height: 1.7;
     }
 
-    .page {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-
-    /* 上方 */
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 60px;
-    }
-
-    .back {
+    a {
+      color: inherit;
       text-decoration: none;
-      color: rgba(255,255,255,0.7);
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
     }
 
-    .brand {
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.4);
-    }
-
-    h1 {
+    header {
+      padding: 60px 20px 30px;
       text-align: center;
-      font-weight: 300;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
       letter-spacing: 0.08em;
-      margin-bottom: 80px;
-      font-size: 2.5rem;
+      margin-bottom: 12px;
     }
 
-    /* 每一張作品 */
-    .artwork {
-      margin-bottom: 120px;
-      text-align: center;
-    }
-
-    .artwork img {
-      width: 100%;
-      max-width: 720px;
-      height: auto;
-      display: block;
+    header p {
+      max-width: 760px;
       margin: 0 auto;
+      color: #6a625c;
+      font-size: 1rem;
     }
 
-    .caption {
-      margin-top: 18px;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.5);
+    nav {
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    nav a {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 8px 14px;
+      border: 1px solid #cfc4b8;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: #2f2a26;
+      color: #fff;
+      border-color: #2f2a26;
+    }
+
+    .gallery {
+      width: min(1100px, 92%);
+      margin: 0 auto 80px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .card-content {
+      padding: 20px 20px 24px;
+    }
+
+    .card-content h2 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #2f2a26;
+    }
+
+    .card-content p {
+      font-size: 0.96rem;
+      color: #6a625c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px 60px;
+      color: #8a8179;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-        margin-bottom: 60px;
+      header {
+        padding-top: 42px;
       }
 
-      .artwork {
-        margin-bottom: 80px;
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .card img {
+        aspect-ratio: 4 / 4.8;
       }
     }
   </style>
 </head>
-
 <body>
-  <main class="page">
 
-    <div class="topbar">
-      <a class="back" href="/works">← Back</a>
-      <div class="brand">CPLIN</div>
-    </div>
-
+  <header>
     <h1>Paintings</h1>
+    <p>
+      These works move between observation, emotion, color, and inner imagination.
+      They do not belong to one single style, but to an ongoing way of seeing.
+    </p>
+  </header>
 
-    <!-- 第一張 -->
-    <div class="artwork">
-      <img src="painting1.jpg" alt="">
-      <div class="caption">Untitled, 2025</div>
-    </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="works.html">Works</a>
+    <a href="painting.html">Paintings</a>
+  </nav>
 
-    <!-- 第二張 -->
-    <div class="artwork">
-      <img src="painting2.jpg" alt="">
-      <div class="caption">Night Lines, 2025</div>
-    </div>
+  <main class="gallery">
+    <article class="card">
+      <img src="images/still-life.jpg" alt="靜物畫：紅碗與白色器皿" />
+      <div class="card-content">
+        <h2>Still Life Study</h2>
+        <p>
+          A study in light, weight, and quiet observation.
+          Everyday objects become a small stage of balance and presence.
+        </p>
+      </div>
+    </article>
 
-    <!-- 第三張 -->
-    <div class="artwork">
-      <img src="painting3.jpg" alt="">
-      <div class="caption">Inner Movement</div>
-    </div>
+    <article class="card">
+      <img src="images/forest-light.jpg" alt="森林畫作：橘黃色光中的樹林小路" />
+      <div class="card-content">
+        <h2>Forest Passage</h2>
+        <p>
+          A path of warmth and shadow.
+          The painting leans toward memory, atmosphere, and the feeling of walking inward.
+        </p>
+      </div>
+    </article>
 
-    <!-- 第四張 -->
-    <div class="artwork">
-      <img src="painting4.jpg" alt="">
-      <div class="caption">Study</div>
-    </div>
+    <article class="card">
+      <img src="images/lion-color.jpg" alt="彩色獅子畫作" />
+      <div class="card-content">
+        <h2>Lion in Color</h2>
+        <p>
+          A vivid burst of instinct and force.
+          Color is used here not only to describe, but to release energy.
+        </p>
+      </div>
+    </article>
 
+    <article class="card">
+      <img src="images/hand-collage.jpg" alt="手的拼貼作品，含無限符號與文字" />
+      <div class="card-content">
+        <h2>Infinite Hand</h2>
+        <p>
+          A collage work about imagination, play, and the endless movement between self and world.
+        </p>
+      </div>
+    </article>
   </main>
+
+  <footer>
+    © Sora Kai
+  </footer>
+
 </body>
 </html>
